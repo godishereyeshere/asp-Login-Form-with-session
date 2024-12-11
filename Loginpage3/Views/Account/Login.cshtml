@@ -4,10 +4,42 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+<!-- رفع خطا با قرار دادن CSS در بلاک <style> -->
+<style>
+    /* انیمیشن تغییر رنگ حاشیه */
+    @@keyframes borderColorChange {
+        0% {
+            border-color: red;
+        }
 
-<div class="row">
-    <div class="col-md-4">
+        25% {
+            border-color: blue;
+        }
+
+        50% {
+            border-color: green;
+        }
+
+        75% {
+            border-color: yellow;
+        }
+
+        100% {
+            border-color: red;
+        }
+    }
+
+    .animated-border {
+        border: 4px solid;
+        border-radius: 10px;
+        animation: borderColorChange 3s infinite;
+        padding: 20px;
+    }
+</style>
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-4 animated-border">
+        <h2 class="text-center">Login</h2>
         @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
@@ -23,13 +55,14 @@
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
+            <div class="form-group form-check">
                 @Html.CheckBox("RememberMe", false, new { @class = "form-check-input" })
                 @Html.Label("RememberMe", "مرا به خاطر بسپار", new { @class = "form-check-label" })
             </div>
 
-
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
         }
     </div>
 </div>
